@@ -1,5 +1,6 @@
-const { Autenticacion_Autorizacion } = require("../auth/type_auth")
-const { modeloUsuarios } = require("./Usuarios")
+import { Autenticacion_Autorizacion } from "../auth/type_Auth.js"
+import modeloUsuarios from "./Usuarios.js"
+
 
 const resolvers_Usuarios = {
     Query: {
@@ -83,8 +84,8 @@ const resolvers_Usuarios = {
         },
         cambiarEstadoUsuario: async (parent, arg, context) => {
 
-            //Autenticacion_Autorizacion(context, ["ADMINISTRADOR", "LIDER"])
-            if ( arg.EstadoPorAdmin/*context.dataUsuario.Rol === "ADMINISTRADOR"*/) {
+            Autenticacion_Autorizacion(context, ["ADMINISTRADOR", "LIDER"])
+            if ( context.dataUsuario.Rol === "ADMINISTRADOR") {
                 const edicionEstadoUsuario = await modeloUsuarios.findByIdAndUpdate({ _id: arg._id }, {
                     Estado: arg.EstadoPorAdmin
                 }, { new: true })
@@ -102,8 +103,8 @@ const resolvers_Usuarios = {
     }
 }
 
-module.exports = { resolvers_Usuarios }
-    /*
+export default resolvers_Usuarios
+/*
 else if (Object.keys(arg).includes("Identificacion")) {
 const buscarUsuario = await modeloUsuarios.findOne({ Identificacion: arg.Identificacion })
 .populate("Proyectos_Liderados")

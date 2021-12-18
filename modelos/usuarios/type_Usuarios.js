@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server-express");
+import { gql } from "apollo-server-express"
 
 const type_Usuarios = gql `
 
@@ -68,4 +68,4 @@ const type_Usuarios = gql `
 
 `
 
-module.exports = { type_Usuarios }
+export default type_Usuarios

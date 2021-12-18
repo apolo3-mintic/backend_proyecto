@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose")
+import mongoose from "mongoose"
+const { Schema, model } = mongoose
 
 const esquemaAvances = new Schema({
 
@@ -30,7 +31,6 @@ const esquemaAvances = new Schema({
 
 const modeloAvances = model("avances", esquemaAvances, "avances")
 
-module.exports = { modeloAvances }
-
+export default modeloAvances
 /* var a = moment("").format('YYYY/MM/DD HH:mm:ss')
 console.log(a) */

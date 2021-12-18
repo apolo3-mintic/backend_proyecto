@@ -1,11 +1,12 @@
-const { gql } = require("apollo-server-express")
-const { type_Auth } = require("../modelos/auth/type_auth")
-const { type_Avances } = require("../modelos/avances/type_Avances")
-const { type_Inscripciones } = require("../modelos/inscripciones/type_Inscripciones")
-const { type_Proyectos } = require("../modelos/proyectos/type_Proyectos")
-const { type_Usuarios } = require("../modelos/usuarios/type_Usuarios")
+import { gql } from "apollo-server-express"
 
-const type_General = gql `
+import type_Auth from "../modelos/auth/type_Auth.js"
+import type_Avances from "../modelos/avances/type_Avances.js"
+import type_Inscripciones from "../modelos/inscripciones/type_Inscripciones.js"
+import type_Proyectos from "../modelos/proyectos/type_Proyectos.js"
+import type_Usuarios from "../modelos/usuarios/type_Usuarios.js"
+
+const type_General = gql`
     scalar Date
 
     enum enum_Roles{
@@ -45,4 +46,5 @@ const type_General = gql `
 `
 const Types = [type_General, type_Usuarios, type_Auth, type_Proyectos, type_Inscripciones, type_Avances]
 
-module.exports = { Types }
+export default Types
+

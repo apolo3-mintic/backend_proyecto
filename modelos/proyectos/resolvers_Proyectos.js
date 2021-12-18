@@ -1,6 +1,7 @@
-const { Autenticacion_Autorizacion } = require("../auth/type_auth")
-const { modeloInscripciones } = require("../inscripciones/Inscripciones")
-const { modeloProyectos } = require("./Proyectos")
+import { Autenticacion_Autorizacion } from "../auth/type_Auth.js"
+import modeloInscripciones from "../inscripciones/Inscripciones.js"
+import modeloProyectos from "./Proyectos.js"
+
 
 const resolvers_Proyectos = {
     Query: {
@@ -124,8 +125,7 @@ const resolvers_Proyectos = {
     }
 }
 
-module.exports = { resolvers_Proyectos }
-
+export default resolvers_Proyectos
 /*
  if (arg.Objetivos_Especificos) {
                 var array = []

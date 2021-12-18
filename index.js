@@ -1,15 +1,16 @@
-const express = require("express")
-const cors = require("cors")
-const { ApolloServer, ApolloError } = require("apollo-server-express")
-const { conexionBD } = require("./basedatos.config/basedatos")
-const { Types } = require("./graphql/typeDefs")
-const { Resolvers } = require("./graphql/resolvers")
-const { ValidarToken } = require("./modelos/auth/Auth")
+import express from "express"
+import cors from "cors"
+import { ApolloServer } from "apollo-server-express"
+import conexionBD from "./basedatos.config/basedatos.js"
+import Types from "./graphql/typeDefs.js"
+import Resolvers from "./graphql/resolvers.js"
+import { ValidarToken } from "./modelos/auth/Auth.js"
+import dotenv from 'dotenv';
 
-require("dotenv").config()
+dotenv.config()
 
 const app = express()
-const puerto = process.env.PORT || 4444
+const puerto = process.env.PORT || 4000
 
 app.use(cors())
 app.use(express.json())
@@ -19,7 +20,7 @@ const servidor = new ApolloServer({
     resolvers: Resolvers,
     context: ({ req, res }) => {
         const token = req.headers?.authorization ?? null
-        if(token) {
+        if (token) {
             const dataUsuario = ValidarToken(token)
             if (dataUsuario) {
                 return { dataUsuario: dataUsuario }

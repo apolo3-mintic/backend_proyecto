@@ -1,5 +1,6 @@
-const { modeloProyectos } = require("../proyectos/Proyectos")
-const { modeloAvances } = require("./Avances")
+import modeloProyectos from "../proyectos/Proyectos.js"
+import modeloAvances from "./Avances.js"
+
 
 const resolvers_Avances = {
     Query: {
@@ -65,4 +66,4 @@ const resolvers_Avances = {
     }
 }
 
-module.exports = { resolvers_Avances }
+export default resolvers_Avances

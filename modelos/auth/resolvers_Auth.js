@@ -1,6 +1,7 @@
-const { GeneradorToken, Encriptacion } = require("./Auth")
-const { modeloUsuarios } = require("../usuarios/Usuarios")
-const { compare } = require("bcrypt")
+import bcrypt from "bcrypt"
+import { GeneradorToken,Encriptacion } from "./Auth.js"
+import modeloUsuarios from "../usuarios/Usuarios.js"
+const { compare } = bcrypt
 
 const resolvers_Auth = {
     Query:{
@@ -53,4 +54,4 @@ const resolvers_Auth = {
     }
 }
 
-module.exports = { resolvers_Auth }
+export default resolvers_Auth

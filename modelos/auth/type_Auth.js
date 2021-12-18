@@ -1,4 +1,4 @@
-const { gql, AuthenticationError, ForbiddenError } = require("apollo-server-express")
+import { gql, AuthenticationError, ForbiddenError } from "apollo-server-express"
 
 const type_Auth = gql`
 
@@ -29,7 +29,7 @@ const type_Auth = gql`
     }
 
 `
-const Autenticacion_Autorizacion = (context, listaPermitida) => {
+export const Autenticacion_Autorizacion = (context, listaPermitida) => {
     if (!context.dataUsuario) {
         throw new AuthenticationError("Usted no se encuentra autenticado.")
     } else {
@@ -41,4 +41,4 @@ const Autenticacion_Autorizacion = (context, listaPermitida) => {
     }
 }
 
-module.exports = { type_Auth, Autenticacion_Autorizacion }
+export default type_Auth

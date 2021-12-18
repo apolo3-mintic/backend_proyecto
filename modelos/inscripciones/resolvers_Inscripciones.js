@@ -1,5 +1,6 @@
-const { Autenticacion_Autorizacion } = require("../auth/type_auth")
-const { modeloInscripciones } = require("./Inscripciones")
+import { Autenticacion_Autorizacion } from "../auth/type_Auth.js"
+import modeloInscripciones from "./Inscripciones.js"
+
 
 const resolvers_Inscripciones = {
     Query: {
@@ -81,8 +82,7 @@ const resolvers_Inscripciones = {
 
 }
 
-module.exports = { resolvers_Inscripciones }
-
+export default resolvers_Inscripciones
 /*
         aceptarInscripcion: async(parent, arg) => {
             const inscripcionAceptada = await modeloInscripciones.findByIdAndUpdate({ _id: arg._id }, {

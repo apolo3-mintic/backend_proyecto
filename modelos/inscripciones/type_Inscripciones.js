@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server-express")
+import { gql } from "apollo-server-express"
 
 const type_Inscripciones = gql `
 
@@ -47,8 +47,7 @@ const type_Inscripciones = gql `
 
 `
 
-module.exports = { type_Inscripciones }
-
+export default type_Inscripciones
 /*
 aceptarInscripcion(_id: ID!): Inscripcion
 */

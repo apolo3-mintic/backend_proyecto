@@ -1,14 +1,16 @@
-const { genSalt, hash } = require("bcrypt")
-const { sign, verify } = require("jsonwebtoken")
+import jsonweb from "jsonwebtoken"
+import bcrypt from "bcrypt"
+const { genSalt, hash } = bcrypt
+const {sign, verify} = jsonweb
 
 
-async function Encriptacion(contrasena) {
+export async function Encriptacion(contrasena) {
     const salt = await genSalt(10)
     const encriptado = await hash(contrasena, salt)
     return encriptado
 }
 
-async function GeneradorToken(payload) {
+export async function GeneradorToken(payload) {
     if (Object.keys(payload).includes("exp")){
         delete payload.exp
         delete payload.iat
@@ -19,7 +21,7 @@ async function GeneradorToken(payload) {
     return firma
 }
 
-const ValidarToken = (token) =>{
+export const ValidarToken = (token) =>{
     if (token){
         const verificacion = verify(token.split(" ")[1], process.env.SECRETO_JWT, (err,data)=>{
             if (err) return { Error: err}
@@ -31,4 +33,3 @@ const ValidarToken = (token) =>{
 }
 
 
-module.exports = { Encriptacion, GeneradorToken, ValidarToken}

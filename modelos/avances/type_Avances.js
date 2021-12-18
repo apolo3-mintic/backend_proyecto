@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server-express")
+import { gql } from "apollo-server-express"
 
 const type_Avances = gql `
 
@@ -44,4 +44,4 @@ const type_Avances = gql `
 
 `
 
-module.exports = { type_Avances }
+export default type_Avances

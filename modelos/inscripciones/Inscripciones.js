@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose")
+import mongoose from "mongoose"
+const { Schema, model } = mongoose
 
 
 const esquemaInscripciones = new Schema({
@@ -28,4 +29,4 @@ const esquemaInscripciones = new Schema({
 
 const modeloInscripciones = model("inscripciones", esquemaInscripciones, "inscripciones")
 
-module.exports = { modeloInscripciones }
+export default modeloInscripciones

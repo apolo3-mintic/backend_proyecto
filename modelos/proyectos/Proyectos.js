@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose")
+import mongoose from "mongoose"
+const { Schema, model } = mongoose
 
 const esquemaProyectos = new Schema({
     Nombre_Proyecto: {
@@ -63,4 +64,4 @@ esquemaProyectos.virtual("Avances_Proyecto", {
 
 const modeloProyectos = model("proyecto", esquemaProyectos)
 
-module.exports = { modeloProyectos }
+export default modeloProyectos

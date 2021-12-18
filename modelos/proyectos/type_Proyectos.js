@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server-express");
+import { gql } from "apollo-server-express"
 
 const type_Proyectos = gql`
 
@@ -62,8 +62,7 @@ const type_Proyectos = gql`
 
 `
 
-module.exports = { type_Proyectos }
-
+export default type_Proyectos
 /* type Objetivo_Especifico {
     _id: ID!
     Descripcion: String!
