@@ -12,7 +12,7 @@ const type_Avances = gql `
     }
 
     type Query{
-        listarAvances:[Avance]
+        listarAvances(Avances_Lider: String):[Avance]
         buscarAvance(_id: ID!): Avance
         fitrarAvances(
             Proyecto_Id: String

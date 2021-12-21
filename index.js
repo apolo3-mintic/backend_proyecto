@@ -39,7 +39,7 @@ const servidor = new ApolloServer({
     }
 }) */
 
-app.listen(puerto, async () => {
+app.listen( puerto , async () => {
     conexionBD()
         .then(() => servidor.start())
         .then(() => servidor.applyMiddleware({ app }))

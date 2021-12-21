@@ -4,11 +4,26 @@ import modeloAvances from "./Avances.js"
 
 const resolvers_Avances = {
     Query: {
-        listarAvances: async (parent, arg) => {
-            const listadoAvances = await modeloAvances.find()
-                .populate("Proyecto_Id")
-                .populate("Estudiante_Id")
-            return listadoAvances
+        listarAvances: async (parent, arg, context) => {
+
+            if (context.dataUsuario.Rol === "ESTUDIANTE") {
+                let filtroPorEstudiante = { Estudiante_Id: context.dataUsuario._id }
+                const listadoAvances = await modeloAvances.find({ ...filtroPorEstudiante })
+                    .populate("Proyecto_Id")
+                    .populate("Estudiante_Id")
+
+                return listadoAvances
+            } else if (context.dataUsuario.Rol === "LIDER") {
+                const listadoAvances = await modeloAvances.find()
+                    .populate("Estudiante_Id")
+                    .populate("Proyecto_Id")
+
+                const filtroPorLider = listadoAvances.filter(
+                    (avance) => avance.Proyecto_Id.Lider_Id.toString() === arg.Avances_Lider
+                )
+
+                return filtroPorLider
+            }
         },
         buscarAvance: async (parent, arg) => {
             const buscarPorId = await modeloAvances.findById({ _id: arg._id })
@@ -26,7 +41,7 @@ const resolvers_Avances = {
     Mutation: {
         crearAvance: async (parent, arg, context) => {
 
-            Autenticacion_Autorizacion(context, ["ESTUDIANTE"])
+            //Autenticacion_Autorizacion(context, ["ESTUDIANTE"])
 
             const verificarPrimerAvance = await modeloAvances.find({ Proyecto_Id: arg.Proyecto_Id }).limit(1)
 
@@ -56,7 +71,7 @@ const resolvers_Avances = {
             return avanceEliminado
         },
         agregarObservaciones: async (parent, arg, context) => {
-            Autenticacion_Autorizacion(context, ["LIDER"])
+            //Autenticacion_Autorizacion(context, ["LIDER"])
 
             const observacionAgregada = await modeloAvances.findByIdAndUpdate({ _id: arg._id }, {
                 Observaciones: arg.Observaciones

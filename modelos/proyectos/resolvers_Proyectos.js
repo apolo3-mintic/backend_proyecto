@@ -2,12 +2,13 @@ import { Autenticacion_Autorizacion } from "../auth/type_Auth.js"
 import modeloInscripciones from "../inscripciones/Inscripciones.js"
 import modeloProyectos from "./Proyectos.js"
 
-
 const resolvers_Proyectos = {
     Query: {
         listarProyectos: async (parent, arg, context) => {
-            Autenticacion_Autorizacion(context, ["ADMINISTRADOR", "ESTUDIANTE"])
-            const listadoProyectos = await modeloProyectos.find()
+            //Autenticacion_Autorizacion(context, ["ADMINISTRADOR", "ESTUDIANTE"])
+            let filtroPorLider = arg.filtro && { Lider_Id: arg.filtro  }
+
+            const listadoProyectos = await modeloProyectos.find({ ...filtroPorLider })
                 .populate("Lider_Id")
                 .populate({ path: "Inscripciones", populate: "Estudiante_Id" })
                 .populate({ path: "Avances_Proyecto", populate: "Estudiante_Id" })
@@ -37,7 +38,7 @@ const resolvers_Proyectos = {
     },
     Mutation: {
         crearProyecto: async (parent, arg, context) => {
-            Autenticacion_Autorizacion(context, ["LIDER"])
+            //Autenticacion_Autorizacion(context, ["LIDER"])
             const proyectoCreado = await modeloProyectos.create({
                 Nombre_Proyecto: arg.Nombre_Proyecto,
                 Objetivo_General: arg.Objetivo_General,
@@ -118,6 +119,8 @@ const resolvers_Proyectos = {
                     Estado: "INACTIVO",
                     Fecha_Terminacion: Date.now()
                 }, { new: true })
+                
+                // no tuve en en cuenta la condicion de que se pone inactivo y afecta a las inscripciones
 
                 return edicionFaseProyecto
             }

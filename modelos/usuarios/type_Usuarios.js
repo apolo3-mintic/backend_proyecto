@@ -61,8 +61,7 @@ const type_Usuarios = gql `
 
         cambiarEstadoUsuario(
             _id: ID!
-            EstadoPorAdmin: enum_EstadoRegistro
-            EstadoPorLider: enum_EstadoRegistroLider
+            Estado: enum_EstadoRegistro!
         ): Usuario
     }
 
